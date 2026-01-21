@@ -1,1 +1,51 @@
+/* =====================================================
+   STARS.CSS
+   Purpose:
+   - Multi-layer star depth
+   - Subtle twinkle variation
+   - Parallax illusion
+===================================================== */
 
+.star.layer1 { opacity: 0.9 }
+.star.layer2 { opacity: 0.6 }
+.star.layer3 { opacity: 0.35 }
+
+.star.layer1 {
+  animation-duration: calc(var(--twinkle-speed) * 0.8);
+}
+.star.layer2 {
+  animation-duration: calc(var(--twinkle-speed) * 1.2);
+}
+.star.layer3 {
+  animation-duration: calc(var(--twinkle-speed) * 1.8);
+}
+
+/* ---------- STAR SIZES ---------- */
+.star.small {
+  width: 1px;
+  height: 1px;
+}
+.star.medium {
+  width: 2px;
+  height: 2px;
+}
+.star.large {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 6px rgba(200,220,255,0.8);
+}
+
+/* ---------- PARALLAX DRIFT ---------- */
+@keyframes starDriftSlow {
+  from { transform: translateY(0) }
+  to   { transform: translateY(-60px) }
+}
+
+@keyframes starDriftFast {
+  from { transform: translateY(0) }
+  to   { transform: translateY(-120px) }
+}
+
+.layer1 { animation-name: starTwinkle, starDriftSlow }
+.layer2 { animation-name: starTwinkle, starDriftSlow }
+.layer3 { animation-name: starTwinkle, starDriftFast }
