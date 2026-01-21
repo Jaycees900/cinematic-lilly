@@ -1,1 +1,156 @@
+/* =====================================================
+   LILIES.CSS
+   Realistic lily anatomy:
+   - stem growth
+   - leaf sprouting
+   - petal bloom
+   - layered glow
+===================================================== */
 
+#lily-field {
+  position: absolute;
+  bottom: 120px;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 80px;
+}
+
+/* ---------- LILY BASE ---------- */
+.lily {
+  position: relative;
+  width: 40px;
+  height: 420px;
+  transform-origin: bottom center;
+}
+
+/* ---------- STEM ---------- */
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  height: 0;
+  background: linear-gradient(
+    to top,
+    #1a3b22,
+    #4e9f6a
+  );
+  border-radius: 4px;
+  transform: translateX(-50%);
+  animation: growStem 4.5s ease-out forwards;
+}
+
+@keyframes growStem {
+  from { height: 0 }
+  to   { height: 360px }
+}
+
+/* ---------- LEAVES ---------- */
+.leaf {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  background: linear-gradient(
+    to right,
+    #1f4d2e,
+    #6bdc96
+  );
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: leafGrow 1.2s ease-out forwards;
+}
+
+.leaf.left {
+  left: -42px;
+  transform: rotate(-28deg);
+  animation-delay: 2.2s;
+}
+
+.leaf.right {
+  right: -42px;
+  transform: rotate(32deg);
+  animation-delay: 2.7s;
+}
+
+@keyframes leafGrow {
+  from {
+    transform: scale(0) rotate(var(--rot));
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+}
+
+/* ---------- FLOWER HEAD ---------- */
+.flower {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%) scale(0);
+  animation: flowerBloom 3.5s ease-out forwards;
+  animation-delay: 4.6s;
+}
+
+/* ---------- PETALS ---------- */
+.petal {
+  position: absolute;
+  width: 44px;
+  height: 80px;
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ffd9ec
+  );
+  border-radius: 60% 60% 40% 40%;
+  filter: drop-shadow(0 0 18px rgba(255,200,230,0.9));
+  transform-origin: bottom center;
+}
+
+.petal:nth-child(1) { transform: rotate(0deg) }
+.petal:nth-child(2) { transform: rotate(60deg) }
+.petal:nth-child(3) { transform: rotate(120deg) }
+.petal:nth-child(4) { transform: rotate(180deg) }
+.petal:nth-child(5) { transform: rotate(240deg) }
+.petal:nth-child(6) { transform: rotate(300deg) }
+
+/* ---------- BLOOM ANIMATION ---------- */
+@keyframes flowerBloom {
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* ---------- GLOW AURA ---------- */
+.flower::after {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    circle,
+    rgba(255,200,230,0.4),
+    rgba(255,200,230,0)
+  );
+  filter: blur(35px);
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.4 }
+  50% { opacity: 0.8 }
+  100% { opacity: 0.4 }
+      }
